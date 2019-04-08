@@ -1,6 +1,8 @@
 public class Homework17 {
 
-	/* Given an array of ints, is it possible to choose a
+	/* Daniel Feliciano
+
+	 * Given an array of ints, is it possible to choose a
 	 * group of some of the ints, such that the group sums
 	 * to the given target? This is a classic backtracking
 	 * recursion problem. Once you understand the recursive
@@ -20,7 +22,13 @@ public class Homework17 {
 
 
 	public static boolean problem1(int start, int[] nums, int target) {
-		return false;
+		if(target == 0)
+  	return true;
+  if(start == nums.length)
+  	return false;
+  if(problem1(start + 1, nums, target - nums[start]))
+  	return true;
+  return problem1(start + 1, nums, target);
 	}
 
 	/* Given an array of ints, is it possible to choose a
@@ -35,7 +43,17 @@ public class Homework17 {
 	 */
 
 	 public static boolean problem2(int start, int[] nums, int target) {
-		 return false;
+		 if(start == nums.length)
+ 	{
+		if(target == 0)
+  		return true;
+  	return false;
+ 	}
+ 	if(nums[start] == 6)
+ 		return problem2(start + 1, nums, target - nums[start]);
+  if(problem2(start + 1, nums, target - nums[start]))
+  	return true;
+  return problem2(start + 1, nums, target);
  	}
 
 	/* Given an array of ints, is it possible to divide the
@@ -52,11 +70,15 @@ public class Homework17 {
 	 */
 
 	public static boolean problem3(int[] nums) {
-		return false;
+		return problem3(nums, 0, 0);
 	}
 
-	public static boolean problem3(/* parameters */) {
-		return false;
+	public static boolean problem3(int[] nums, int i, int balance) {
+		if(i == nums.length)
+		return (balance == 0);
+	if(problem3(nums, i + 1, balance + nums[i]))
+		return true;
+	return problem3(nums, i + 1, balance - nums[i]);
 	}
 
 
@@ -77,7 +99,17 @@ public class Homework17 {
 	 */
 
 	public static boolean problem4(int start, int[] nums, int target) {
-		return false;
+		if(start >= nums.length)
+ 	{
+		if(target == 0)
+  		return true;
+  	return false;
+ 	}
+ 	int i = start + 1;
+ 	for(;  i < nums.length && nums[start] == nums[i]; i++);
+ 	if(problem4(i, nums, target - ((i - start) * nums[start])))
+ 		return true;
+ 	return problem4(i, nums, target);
 	}
 
 	/* Given an array of ints, is it possible to divide
@@ -95,11 +127,15 @@ public class Homework17 {
 	 */
 
 	public static boolean problem5(int[] nums) {
-		return false;
+		return problem5(nums, 0, 0, 0);
 	}
 
-	public static boolean problem5(/* parameters */) {
-		return false;
+	public static boolean problem5(int[] nums, int i, int group1, int group2) {
+		if(i == nums.length)
+		return (group1 % 2 == 1 && group2 % 10 == 0 || group2 % 2 == 1 && group1 % 10 == 0);
+	if(problem5(nums, i + 1, group1 + nums[i], group2))
+		return true;
+	return problem5(nums, i + 1, group1, group2 + nums[i]);
 	}
 
 	public static void main(String[] args) {
